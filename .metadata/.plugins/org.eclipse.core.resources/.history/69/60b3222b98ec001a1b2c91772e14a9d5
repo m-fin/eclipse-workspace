@@ -1,0 +1,54 @@
+package assignment1;
+
+public class test1 {
+	public static void main(String[] args) {
+		System.out.println("test");
+		
+		StackSet stackset = new StackSet(10);
+		
+		stackset.push(1);
+		stackset.push(2);
+		stackset.push(3);
+		
+		
+//		
+//		System.out.println(stackset.peek());
+		
+		
+//		stackset.push(3);
+//		stackset.push(4);
+//		stackset.push(5);
+//		
+//		System.out.println(stackset.size());
+//		
+//		System.out.println(stackset.peek());
+//		System.out.println(stackset.peek());
+//		
+//		stackset.push(6);
+//		
+//		System.out.println(stackset.peek());
+		
+		//StackSet stackset = new StackSet(5);
+		//System.out.println(stackset.isEmpty());
+		
+//		Node node0 = new NodeImpl(0);
+//		
+//		Node node1 = new NodeImpl(5);
+//		
+//		node0.setNext(node1);
+//		
+//		System.out.println(node0.getNext().getValue());
+//		
+//		StackSet stackset = new StackSet(5);
+//		
+//		stackset.push(3);
+//		
+//		System.out.println(stackset.size());
+//		System.out.println(stackset.contains(0));
+//		
+//		System.out.println(stackset.peek());
+//		stackset.push(6);
+//		
+//		System.out.println(stackset.peek());
+	}
+}

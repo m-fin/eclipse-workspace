@@ -1,3 +1,4 @@
+package assignment1;
 /**
  * COMP 410
  * Don't modify this file!
@@ -5,8 +6,6 @@
  * it is in your build path and the jar is in your project.
 */
 
-/*
-package assignment1;
 import gradingTools.comp410f20.assignment1.testcases.Assignment1Suite;
 
 public class RunTests {
@@ -14,4 +13,3 @@ public class RunTests {
     Assignment1Suite.main(args);
   }
 }
-*/

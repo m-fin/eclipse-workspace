@@ -1,0 +1,187 @@
+/**
+ * COMP 410
+ * See inline comment descriptions for methods we need that are
+ * not described in the interface.
+ *
+*/
+package assignment1;
+
+public class StackSet implements StackSet_Interface {
+  private Node head;  //this will be the entry point to your linked list 
+                      //( it points to the first data cell, the top for a stack )
+  private final int limit;  //defines the maximum size the stackset may contain
+  private int size;   //current count of elements in the stackset 
+  
+  public StackSet( int maxNumElts ){ //this constructor is needed for testing purposes. 
+    head = null;                 //Please don't modify what you see here!
+    limit = maxNumElts;          //you may add fields if you need to
+    size = 0;
+  }
+  
+  //implement all methods of the interface, and 
+  //also include the getRoot method below that we made for testing purposes. 
+  //Feel free to implement private helper methods!
+  //you may add any fields you need to add to make it all work... 
+  
+  public Node getRoot(){ //leave this method as is, used by the grader to grab 
+    return head;         //your data list easily.
+  }
+
+@Override
+public boolean push(double elt) {
+	
+	if (this.contains(elt)) {
+		
+		if (this.getRoot().getNext().getValue() == elt) {
+			return true;
+		}
+		
+		//find existing node, make null, connect node that was previous to it to one that was after it, move to top
+		
+		
+		Node newNode = this.getRoot().getNext();
+		
+		while (node.getValue() != elt) {
+			
+		}
+
+//		Node node = this.getRoot();
+//		Node aboveNode = node;//the top element is the most recent element
+//		Node belowNode = node.getNext(); 
+//		
+//		while (node.getValue() != elt) {
+//			aboveNode = node;
+//			node = node.getNext();
+//			belowNode = node.getNext();
+//		}
+//		
+//		node = null;
+//		belowNode.setNext(aboveNode);
+//		
+//		Node newNode = new NodeImpl(elt);
+//		this.getRoot().setNext(newNode);
+		
+		return true;
+	}
+	else if (this.isFull()) {
+		return false;
+	}
+	else {
+		Node newNode = new NodeImpl(elt);
+		
+		if (size > 0) {
+			newNode.setNext(this.getRoot().getNext());
+		}
+		
+		this.getRoot().setNext(newNode);
+		
+		size++;
+		
+		return true;
+	}
+}
+
+@Override
+public boolean pop() {
+	if (this.isEmpty()) {
+		return false;
+	}
+	else if (this.size() == 1) {
+		Node topNode = this.topNode();
+		
+		topNode = null;
+		size--;
+		
+		return true;
+	}
+	else {
+		Node topNode = this.topNode();
+		Node nextToTopNode = this.nextToTopNode();
+		
+		nextToTopNode.setNext(null);
+		size--;
+		
+		return true;
+	}
+}
+
+//private Node getPreviousNode(Node node) {
+//	Node nodeCounter = this.getRoot();
+//	
+//	while 
+//}
+
+private Node nextToTopNode() {
+	Node nodeCounter = this.head;
+	
+	while (nodeCounter.getNext() != topNode()) {
+		nodeCounter = nodeCounter.getNext();
+	}
+	
+	return nodeCounter;
+}
+
+private Node topNode() {
+	Node nodeCounter = this.head;
+	
+	while (nodeCounter.getNext() != null) {
+		nodeCounter = nodeCounter.getNext();
+	}
+	
+	return nodeCounter;
+}
+
+@Override
+public double peek() {
+	if (this.isEmpty()) {
+		return Double.NaN;
+	}
+	else {
+		return this.topNode().getValue();
+	}
+}
+
+@Override
+public boolean contains(double elt) {
+	if (this.isEmpty()) {
+		return false;
+	}
+	
+	Node nodeCounter = this.head;
+	
+	System.out.println(nodeCounter);
+	
+	while (true) {
+		if (nodeCounter.getValue() == elt) {
+			return true;
+		}
+		
+		if (nodeCounter.getNext() == null) {
+			return false;
+		}
+		
+		nodeCounter = nodeCounter.getNext();
+	}
+}
+
+@Override
+public int size() {
+	return this.size;
+}
+
+@Override
+public int limit() {
+	return this.limit;
+}
+
+@Override
+public boolean isEmpty() {
+	return size() == 0;
+}
+
+@Override
+public boolean isFull() {
+	return size() == limit();
+}
+
+}

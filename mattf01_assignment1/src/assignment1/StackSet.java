@@ -31,7 +31,27 @@ public class StackSet implements StackSet_Interface {
 public boolean push(double elt) {
 	
 	if (this.contains(elt)) {
+		
+		if (this.getRoot().getValue() == elt) {
+			return true;
+		}
+				
+		Node nodePrevious = null;
+		Node node = this.getRoot();
+		
+		while (node.getValue() != elt) {
+			nodePrevious = node;
+			node = node.getNext();
+		}
+		
+		nodePrevious.setNext(node.getNext());
+		node = null;
+		node = new NodeImpl(elt);
+		node.setNext(this.getRoot());
+		this.head = node;
+		
 		return true;
+		
 	}
 	else if (this.isFull()) {
 		return false;
@@ -39,12 +59,11 @@ public boolean push(double elt) {
 	else {
 		Node newNode = new NodeImpl(elt);
 		
-		if (this.isEmpty()) {
-			this.head = newNode;
+		if (!this.isEmpty()) {
+			newNode.setNext(this.getRoot());
 		}
-		else {
-			this.head.setNext(newNode);
-		}
+		
+		this.head = newNode;
 		
 		size++;
 		
@@ -57,35 +76,20 @@ public boolean pop() {
 	if (this.isEmpty()) {
 		return false;
 	}
-	else {
-		Node topNode = this.topNode();
-		Node nextToTopNode = this.nextToTopNode();
+	else if (this.size() == 1) {
+		this.head = null;
 		
-		nextToTopNode.setNext(null);
 		size--;
 		
 		return true;
 	}
-}
-
-private Node nextToTopNode() {
-	Node nodeCounter = this.head;
-	
-	while (nodeCounter.getNext() != topNode()) {
-		nodeCounter = nodeCounter.getNext();
+	else {
+		this.head = this.getRoot().getNext();
+		
+		size--;
+		
+		return true;
 	}
-	
-	return nodeCounter;
-}
-
-private Node topNode() {
-	Node nodeCounter = this.head;
-	
-	while (nodeCounter.getNext() != null) {
-		nodeCounter = nodeCounter.getNext();
-	}
-	
-	return nodeCounter;
 }
 
 @Override
@@ -94,7 +98,7 @@ public double peek() {
 		return Double.NaN;
 	}
 	else {
-		return this.topNode().getValue();
+		return this.getRoot().getValue();
 	}
 }
 
@@ -104,7 +108,7 @@ public boolean contains(double elt) {
 		return false;
 	}
 	
-	Node nodeCounter = this.head;
+	Node nodeCounter = this.getRoot();
 	
 	System.out.println(nodeCounter);
 	
@@ -118,6 +122,16 @@ public boolean contains(double elt) {
 		}
 		
 		nodeCounter = nodeCounter.getNext();
+	}
+}
+
+//for testing
+public void traverseAllNodes() {
+	Node nodeTraverser = this.getRoot();
+	
+	while (nodeTraverser != null) {
+		System.out.println(nodeTraverser.getValue());
+		nodeTraverser = nodeTraverser.getNext();
 	}
 }
 
